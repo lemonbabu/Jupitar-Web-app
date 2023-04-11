@@ -27,140 +27,189 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFE8E1E1),
-      body: Center(
-        child: SingleChildScrollView(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color(0xFFE8E1E1),
+        body: SingleChildScrollView(
           physics:const BouncingScrollPhysics(),
-          child: Consumer<LinkProvider>(
-    builder: (context, provider, child) {
-    List<AddLinkModel> linklist =
-    provider.linklist;
-    return
-           SizedBox(
-             child: ListView.builder(
-                  physics:
-                  const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: linklist.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                WebView(
-                                  link:"https://${linklist[linklist.length-index-1].link_address}",
-                                ),
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets
-                            .symmetric(
-                            vertical: 12,horizontal: 10),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width-12,
-                          height: 70.h,
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors
-                                      .white
-                                      .withOpacity(
-                                      0.3),
-                                  spreadRadius: 2,
-                                  blurRadius: 3,
-                                  offset: const Offset(
-                                      0,
-                                      0), // Shadow position
-                                ),
-                              ],
-                              borderRadius:
-                              BorderRadius
-                                  .circular(30),
-                              border: Border.all(
-                                  width: 1,
-                                  color: Colors
-                                      .white
-                                      .withOpacity(
-                                      0.7)),
-                              color: Colors
-                                  .transparent),
-                          child: SizedBox(
-                            height: 70.h,
-                            width: MediaQuery.of(context).size.width-12,
-                            child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment
-                                  .start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: SizedBox(
-                                    height: 50.h,
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          linklist[linklist.length-index-1].link_name,
-                                          textAlign:
-                                          TextAlign
-                                              .center,
-                                          maxLines: 2,
-                                          overflow:
-                                          TextOverflow
-                                              .ellipsis,
-                                          style: TextStyle(
-                                              fontSize: 20
-                                                  .sp,
-                                              color: Colors
-                                                  .black,
-                                              fontWeight:
-                                              FontWeight.w600),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(width: 100.w,height:50.h,child: Image.asset("images/splash.png")),
+              Column(
+                children: [
+                  Text(
+                    "List of website",
+                    textAlign:
+                    TextAlign
+                        .center,
+                    maxLines: 2,
+                    overflow:
+                    TextOverflow
+                        .ellipsis,
+                    style: TextStyle(
+                        fontSize: 18
+                            .sp,
+                        color: Colors
+                            .black,
+                        fontWeight:
+                        FontWeight.w600),
+                  ),
+                  Consumer<LinkProvider>(
+      builder: (context, provider, child) {
+      List<AddLinkModel> linklist =
+      provider.linklist;
+      return
+      linklist.length<1? SizedBox(
+        height: MediaQuery.of(context).size.height-100,
+        child: Center(
+          child: Text(
+            "No data available",
+            textAlign:
+            TextAlign
+                .center,
+            maxLines: 2,
+            overflow:
+            TextOverflow
+                .ellipsis,
+            style: TextStyle(
+                fontSize: 18
+                    .sp,
+                color: Colors
+                    .black,
+                fontWeight:
+                FontWeight.w600),
+          ),
+        ),
+      ):
+                   SizedBox(
+                     child: ListView.builder(
+                          physics:
+                          const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: linklist.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        WebView(
+                                          link:"https://${linklist[linklist.length-index-1].link_address}",
                                         ),
-                                        SizedBox(height: 10.h,),
-                                        Text(
-                                          linklist[linklist.length-index-1].link_address!,
-                                          textAlign:
-                                          TextAlign
-                                              .center,
-                                          maxLines: 2,
-                                          overflow:
-                                          TextOverflow
-                                              .ellipsis,
-                                          style: TextStyle(
-                                              fontSize: 18
-                                                  .sp,
-                                              color: Colors
-                                                  .black,
-                                              fontWeight:
-                                              FontWeight.w600),
+                                  ),
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets
+                                    .symmetric(
+                                    vertical: 12,horizontal: 10),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width-12,
+                                  height: 70.h,
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors
+                                              .white
+                                              .withOpacity(
+                                              0.3),
+                                          spreadRadius: 2,
+                                          blurRadius: 3,
+                                          offset: const Offset(
+                                              0,
+                                              0), // Shadow position
                                         ),
                                       ],
-                                    )
+                                      borderRadius:
+                                      BorderRadius
+                                          .circular(30),
+                                      border: Border.all(
+                                          width: 1,
+                                          color: Colors
+                                              .white
+                                              .withOpacity(
+                                              0.7)),
+                                      color: Colors
+                                          .transparent),
+                                  child: SizedBox(
+                                    height: 70.h,
+                                    width: MediaQuery.of(context).size.width-12,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: SizedBox(
+                                            height: 50.h,
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  linklist[linklist.length-index-1].link_name,
+                                                  textAlign:
+                                                  TextAlign
+                                                      .center,
+                                                  maxLines: 2,
+                                                  overflow:
+                                                  TextOverflow
+                                                      .ellipsis,
+                                                  style: TextStyle(
+                                                      fontSize: 15
+                                                          .sp,
+                                                      color: Colors
+                                                          .black,
+                                                      fontWeight:
+                                                      FontWeight.w600),
+                                                ),
+                                                SizedBox(height: 10.h,),
+                                                Text(
+                                                  linklist[linklist.length-index-1].link_address!,
+                                                  textAlign:
+                                                  TextAlign
+                                                      .center,
+                                                  maxLines: 2,
+                                                  overflow:
+                                                  TextOverflow
+                                                      .ellipsis,
+                                                  style: TextStyle(
+                                                      fontSize: 14
+                                                          .sp,
+                                                      color: Colors
+                                                          .black,
+                                                      fontWeight:
+                                                      FontWeight.w600),
+                                                ),
+                                              ],
+                                            )
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
                                   ),
                                 ),
-
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  })
-          );})
+                              ),
+                            );
+                          })
+                  );}),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showMyDialog();
-        },
-        elevation: 3,
-        hoverColor: Colors.amber,
-        backgroundColor: Colors.green.withOpacity(0.5),
-        child: const Icon(Icons.add),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _showMyDialog();
+          },
+          elevation: 3,
+          hoverColor: Colors.amber,
+          backgroundColor: Colors.green.withOpacity(0.5),
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
@@ -170,7 +219,7 @@ class _HomePageState extends State<HomePage> {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Center(child: const Text('Add More')),
+          title: const Center(child: Text('Add new website')),
           content: SingleChildScrollView(
             child: ListBody(
               children:  <Widget>[
