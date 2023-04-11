@@ -102,93 +102,118 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 );
                               },
-                              child: Padding(
-                                padding: const EdgeInsets
-                                    .symmetric(
-                                    vertical: 12,horizontal: 10),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width-12,
-                                  height: 70.h,
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors
-                                              .white
-                                              .withOpacity(
-                                              0.3),
-                                          spreadRadius: 2,
-                                          blurRadius: 3,
-                                          offset: const Offset(
-                                              0,
-                                              0), // Shadow position
-                                        ),
-                                      ],
-                                      borderRadius:
-                                      BorderRadius
-                                          .circular(30),
-                                      border: Border.all(
-                                          width: 1,
-                                          color: Colors
-                                              .white
-                                              .withOpacity(
-                                              0.7)),
-                                      color: Colors
-                                          .transparent),
-                                  child: SizedBox(
-                                    height: 70.h,
+                              child: Dismissible(
+                                key: ValueKey(linklist[linklist.length-index-1].id),
+                                direction: DismissDirection.endToStart,
+                                confirmDismiss: _showConfirmationDialog,
+                                onDismissed: (direction) {
+                                  provider.deletelink(linklist[linklist.length-index-1].id!);
+                                },
+                                background: Padding(
+                                  padding: const EdgeInsets.all(14.0),
+                                  child: Container(
+                                    height: 100.h,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Colors.red,
+                                    ),
+                                    alignment: Alignment.centerRight,
+                                    child: Center(
+                                      child:  Icon(
+                                        Icons.delete,size: 45.sp,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets
+                                      .symmetric(
+                                      vertical: 12,horizontal: 10),
+                                  child: Container(
                                     width: MediaQuery.of(context).size.width-12,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment
-                                          .start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: SizedBox(
-                                            height: 50.h,
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  linklist[linklist.length-index-1].link_name,
-                                                  textAlign:
-                                                  TextAlign
-                                                      .center,
-                                                  maxLines: 2,
-                                                  overflow:
-                                                  TextOverflow
-                                                      .ellipsis,
-                                                  style: TextStyle(
-                                                      fontSize: 15
-                                                          .sp,
-                                                      color: Colors
-                                                          .black,
-                                                      fontWeight:
-                                                      FontWeight.w600),
-                                                ),
-                                                SizedBox(height: 10.h,),
-                                                Text(
-                                                  linklist[linklist.length-index-1].link_address!,
-                                                  textAlign:
-                                                  TextAlign
-                                                      .center,
-                                                  maxLines: 2,
-                                                  overflow:
-                                                  TextOverflow
-                                                      .ellipsis,
-                                                  style: TextStyle(
-                                                      fontSize: 14
-                                                          .sp,
-                                                      color: Colors
-                                                          .black,
-                                                      fontWeight:
-                                                      FontWeight.w600),
-                                                ),
-                                              ],
-                                            )
+                                    height: 70.h,
+                                    decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors
+                                                .white
+                                                .withOpacity(
+                                                0.3),
+                                            spreadRadius: 2,
+                                            blurRadius: 3,
+                                            offset: const Offset(
+                                                0,
+                                                0), // Shadow position
                                           ),
-                                        ),
+                                        ],
+                                        borderRadius:
+                                        BorderRadius
+                                            .circular(30),
+                                        border: Border.all(
+                                            width: 1,
+                                            color: Colors
+                                                .white
+                                                .withOpacity(
+                                                0.7)),
+                                        color: Colors
+                                            .transparent),
+                                    child: SizedBox(
+                                      height: 70.h,
+                                      width: MediaQuery.of(context).size.width-12,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: SizedBox(
+                                              height: 50.h,
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                    linklist[linklist.length-index-1].link_name,
+                                                    textAlign:
+                                                    TextAlign
+                                                        .center,
+                                                    maxLines: 2,
+                                                    overflow:
+                                                    TextOverflow
+                                                        .ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize: 15
+                                                            .sp,
+                                                        color: Colors
+                                                            .black,
+                                                        fontWeight:
+                                                        FontWeight.w600),
+                                                  ),
+                                                  SizedBox(height: 10.h,),
+                                                  Text(
+                                                    linklist[linklist.length-index-1].link_address!,
+                                                    textAlign:
+                                                    TextAlign
+                                                        .center,
+                                                    maxLines: 2,
+                                                    overflow:
+                                                    TextOverflow
+                                                        .ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize: 14
+                                                            .sp,
+                                                        color: Colors
+                                                            .black,
+                                                        fontWeight:
+                                                        FontWeight.w600),
+                                                  ),
+                                                ],
+                                              )
+                                            ),
+                                          ),
 
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -304,4 +329,22 @@ class _HomePageState extends State<HomePage> {
         linkcontroller.text='';
       }
     }
+  Future<bool?> _showConfirmationDialog(DismissDirection direction) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Remove Website'),
+          content: const Text('Are you sure to delete this Website?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('NO'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('YES'),
+            ),
+          ],
+        ));
+  }
 }

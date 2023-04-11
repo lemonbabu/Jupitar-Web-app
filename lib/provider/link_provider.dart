@@ -26,6 +26,12 @@ class LinkProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
-
+  deletelink(int id) async {
+    final rowId = await DBHelper.deletelink(id);
+    if(rowId > 0) {
+      linklist.removeWhere((element) => element.id == id);
+      notifyListeners();
+    }
+  }
 
 }

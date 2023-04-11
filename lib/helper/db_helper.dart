@@ -28,5 +28,8 @@ class DBHelper{
     final List<Map<String, dynamic>> mapList = await db.query(tablelink);
     return List.generate(mapList.length, (index) => AddLinkModel.fromMap(mapList[index]));
   }
-
+  static Future<int> deletelink(int id) async {
+    final db = await open();
+    return db.delete(tablelink, where: '$tablelinkid = ?', whereArgs: [id]);
+  }
 }
