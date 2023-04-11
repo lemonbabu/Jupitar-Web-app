@@ -58,32 +58,34 @@ class _WebViewState extends State<WebView> {
           return true;
         }
       },
-      child: Scaffold(
-          body: StreamBuilder(
-            stream: connectivity.onConnectivityChanged,
-            builder: (_, snapshot){
-              return snapshot.connectionState==ConnectionState.active?
-              snapshot.data!=ConnectivityResult.none?
-              WebViewWidget(controller: controller): Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.wifi_off_sharp,size: 45,),
-                    SizedBox(height: 10,),
-                    Text('No Data Connection')
-                  ],
-                ),
-              )
-                  :WebViewWidget(controller: controller);
-            },),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, HomePage.routeName);
-          },
-          elevation: 3,
-          hoverColor: Colors.amber,
-          backgroundColor: Colors.green.withOpacity(0.8),
-          child: const Icon(Icons.home),
+      child: SafeArea(
+        child: Scaffold(
+            body: StreamBuilder(
+              stream: connectivity.onConnectivityChanged,
+              builder: (_, snapshot){
+                return snapshot.connectionState==ConnectionState.active?
+                snapshot.data!=ConnectivityResult.none?
+                WebViewWidget(controller: controller): Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.wifi_off_sharp,size: 45,),
+                      SizedBox(height: 10,),
+                      Text('No Data Connection')
+                    ],
+                  ),
+                )
+                    :WebViewWidget(controller: controller);
+              },),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, HomePage.routeName);
+            },
+            elevation: 3,
+            hoverColor: Colors.amber,
+            backgroundColor: Colors.green.withOpacity(0.8),
+            child: const Icon(Icons.home),
+          ),
         ),
       ),
     );
